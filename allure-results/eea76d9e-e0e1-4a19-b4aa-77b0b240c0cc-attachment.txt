@@ -1,0 +1,2 @@
+CREATE USER STATUS: 200
+CREATE USER RESPONSE: {"success":true,"user":{"email":"user_f6d691a6@example.com","name":"Test User"},"accessToken":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OTFlNDMzOWVkMjgwMDAxYjY2ZWRhNiIsImlhdCI6MTc1NDM5MTYwMywiZXhwIjoxNzU0MzkyODAzfQ.TnihRKsEdtr6_umrOPysS_CB5b_LT72AuNZW4HJsKNs","refreshToken":"17361a168fb328c291efb783b84e64eb8cf3abd6d9f2a2fb3d72eb18409881d727a0d1f0ab893662"}

@@ -1,0 +1,4 @@
+CREATE USER STATUS: 200
+CREATE USER RESPONSE: {"success":true,"user":{"email":"user_98704066@example.com","name":"Test User"},"accessToken":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OTFkY2RkOWVkMjgwMDAxYjY2ZWM5ZSIsImlhdCI6MTc1NDM4OTcyNSwiZXhwIjoxNzU0MzkwOTI1fQ.YU9-ico41fimW2PRK6-ki2XdCuNJlneVbC4fm-Q-UqA","refreshToken":"3d5c88e481ba2027dfb56e22fa78ce896e8d1fb8d10af2655aa0f7032db628f29452f172ef9e975f"}
+NAME CHANGE STATUS: 200
+NAME CHANGE RESPONSE: {"success":true,"user":{"email":"user_98704066@example.com","name":"Anna Miller"}}

@@ -1,0 +1,4 @@
+CREATE USER STATUS: 200
+CREATE USER RESPONSE: {"success":true,"user":{"email":"user_798353cc@example.com","name":"Test User"},"accessToken":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OTFkZTRmOWVkMjgwMDAxYjY2ZWNjMSIsImlhdCI6MTc1NDM5MDA5NSwiZXhwIjoxNzU0MzkxMjk1fQ.Oh8KdMWKkWEaRhWdmL8BUJVMfQs6dLASDjaAG12Ri6g","refreshToken":"4b13ed792ba0c46c87409a58b9855693cb02fcbfd81fd2c391eb8c6dfe674f637e77eb6dc978a5fe"}
+EMAIL CHANGE STATUS: 200
+EMAIL CHANGE RESPONSE: {"success":true,"user":{"email":"user_45137dd5@example.com","name":"Test User"}}
