@@ -7,14 +7,20 @@ from data.user_data import User
 
 logger = logging.getLogger(__name__)
 
-@pytest.fixture
+@pytest.fixture(scope="function")
 def create_user():
     """
-    Фикстура для создания, авторизации и последующего удаления тестового пользователя.
+    Фикстура для создания, авторизации и удаления тестового пользователя.
+
     Возвращает:
-    - token (str): Токен авторизации пользователя
+        dict: {
+            "token": str,
+            "email": str,
+            "headers": dict,
+            "user_data": dict
+        }
     """
-    # 1. Подготовка уникальных данных пользователя
+    # 1. Генерация уникального email
     unique_email = f"user_{uuid.uuid4().hex[:8]}@example.com"
     user_data = {
         "email": unique_email,
@@ -31,9 +37,9 @@ def create_user():
             timeout=10
         )
         register_response.raise_for_status()
-        logger.info(f"Пользователь создан: {unique_email}")
+        logger.info(f"✅ Пользователь создан: {unique_email}")
     except Exception as e:
-        logger.error(f"Ошибка регистрации пользователя: {str(e)}")
+        logger.error(f"❌ Ошибка регистрации: {str(e)}")
         pytest.fail(f"Не удалось зарегистрировать пользователя: {str(e)}")
 
     # 3. Авторизация пользователя
@@ -48,15 +54,20 @@ def create_user():
         token = login_response.json().get("accessToken")
         if not token:
             raise ValueError("Токен авторизации не получен")
-        logger.info(f"Пользователь авторизован: {unique_email}")
+        logger.info(f"🔐 Авторизация успешна: {unique_email}")
     except Exception as e:
-        logger.error(f"Ошибка авторизации: {str(e)}")
+        logger.error(f"❌ Ошибка авторизации: {str(e)}")
         pytest.fail(f"Не удалось авторизовать пользователя: {str(e)}")
 
-    # 4. Передача токена в тест
-    yield token
+    # 4. Возврат данных в тест
+    yield {
+        "token": token,
+        "email": unique_email,
+        "headers": Handlers.auth_headers(token),
+        "user_data": user_data
+    }
 
-    # 5. Удаление пользователя (пост-очистка)
+    # 5. Удаление пользователя после теста
     try:
         delete_response = requests.delete(
             Handlers.full_url(Handlers.DELETE_USER),
@@ -65,10 +76,11 @@ def create_user():
         )
         if delete_response.status_code != 202:
             raise ValueError(f"Неожиданный статус код: {delete_response.status_code}")
-        logger.info(f"Пользователь удалён: {unique_email}")
+        logger.info(f"🧹 Пользователь удалён: {unique_email}")
     except Exception as e:
-        logger.error(f"Ошибка удаления пользователя: {str(e)}")
-        # Не вызываем pytest.fail() в финализаторе, чтобы не влиять на результат теста
+        logger.warning(f"⚠️ Ошибка удаления пользователя: {str(e)}")
+
+
 
 
 
